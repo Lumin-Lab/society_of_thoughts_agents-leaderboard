@@ -77,7 +77,7 @@ services:
       - agent-network
 
 {participant_services}
-  agentbeats-client{suffix}:
+  agentbeats-client:
     image: ghcr.io/agentbeats/agentbeats-client:v1.0.0
     platform: linux/amd64
     container_name: agentbeats-client{suffix}
