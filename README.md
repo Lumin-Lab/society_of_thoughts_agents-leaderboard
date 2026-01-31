@@ -24,4 +24,8 @@ sudo docker compose up --abort-on-container-exit
 ```
 
 The results will be written to `output/results.json`.
+
+git checkout -b preview
 git push origin preview
+
+https://docs.agentbeats.dev/tutorial/
