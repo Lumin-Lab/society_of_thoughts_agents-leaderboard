@@ -1,0 +1,57 @@
+[green_agent]
+endpoint = "http://green-agent-society:9021"
+
+[[participants]]
+role = "purple"
+endpoint = "http://purple-society:9022"
+
+[[participants]]
+role = "red"
+endpoint = "http://red-society:9023"
+
+[config]
+problem_statement = "Sort a list of integers in nondecreasing order."
+buggy_solution = "def sort_nums(nums):\n    return nums.sort()\n"
+num_turns = 5
+
+[[config.expected_behavior]]
+input = [
+    [
+        3,
+        1,
+        2,
+    ],
+]
+output = [
+    1,
+    2,
+    3,
+]
+
+[[config.expected_behavior]]
+input = [
+    [
+        5,
+        5,
+        1,
+    ],
+]
+output = [
+    1,
+    5,
+    5,
+]
+
+[[config.expected_behavior]]
+input = [
+    [
+        -1,
+        0,
+        -1,
+    ],
+]
+output = [
+    -1,
+    -1,
+    0,
+]

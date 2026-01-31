@@ -1,0 +1,80 @@
+# Auto-generated from scenario.toml
+
+services:
+  green-agent:
+    image: ghcr.io/lumin-lab/green-society-of-thoughts-coding-judge-agent:v0.1
+    platform: linux/amd64
+    container_name: green-agent-society
+    command: ["--host", "0.0.0.0", "--port", "9021", "--card-url", "http://green-agent-society:9021"]
+    environment:
+      - PYTHONUNBUFFERED=1
+      - API_KEY=${GEMINI_API_KEY}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9021/.well-known/agent-card.json"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 30s
+    depends_on:
+      purple:
+        condition: service_healthy
+      red:
+        condition: service_healthy
+    networks:
+      - agent-network
+
+  purple:
+    image: ghcr.io/lumin-lab/purple-society-of-thoughts-coding-student-agent:v0.1
+    platform: linux/amd64
+    container_name: purple-society
+    command: ["--host", "0.0.0.0", "--port", "9022", "--card-url", "http://purple-society:9022"]
+    environment:
+      - PYTHONUNBUFFERED=1
+      - API_KEY=${GEMINI_API_KEY}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9022/.well-known/agent-card.json"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 30s
+    networks:
+      - agent-network
+
+  red:
+    image: ghcr.io/lumin-lab/red-society-of-thoughts-coding-tutor-agent:v0.1
+    platform: linux/amd64
+    container_name: red-society
+    command: ["--host", "0.0.0.0", "--port", "9023", "--card-url", "http://red-society:9023"]
+    environment:
+      - PYTHONUNBUFFERED=1
+      - API_KEY=${GEMINI_API_KEY}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9023/.well-known/agent-card.json"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 30s
+    networks:
+      - agent-network
+
+  agentbeats-client-society:
+    image: ghcr.io/agentbeats/agentbeats-client:v1.0.0
+    platform: linux/amd64
+    container_name: agentbeats-client-society
+    volumes:
+      - ./a2a-scenario.toml:/app/scenario.toml
+      - ./output:/app/output
+    command: ["scenario.toml", "output/results.json"]
+    depends_on:
+      green-agent:
+        condition: service_healthy
+      purple:
+        condition: service_healthy
+      red:
+        condition: service_healthy
+    networks:
+      - agent-network
+
+networks:
+  agent-network:
+    driver: bridge

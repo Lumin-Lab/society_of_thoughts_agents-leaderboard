@@ -1,0 +1,22 @@
+[green_agent]
+image = "society-of-thoughts-green:local"
+
+[[participants]]
+name = "purple"
+image = "society-of-thoughts-purple:local"
+
+[[participants]]
+name = "red"
+image = "society-of-thoughts-red:local"
+
+[config]
+problem_statement = "Sort a list of integers in nondecreasing order."
+buggy_solution = """
+def sort_nums(nums):
+    return nums.sort()
+"""
+expected_behavior = [
+  { input = [[3, 1, 2]], output = [1, 2, 3] },
+  { input = [[5, 5, 1]], output = [1, 5, 5] }
+]
+num_turns = 3
