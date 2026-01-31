@@ -29,3 +29,26 @@ git checkout -b preview
 git push origin preview
 
 https://docs.agentbeats.dev/tutorial/
+
+
+Setting Up Webhooks on Leaderboard github repo
+This next set of steps allows your leaderboard to automatically update when new results are pushed to the repo.
+
+First, navigate to your green agent page on AgentBeats. Open the box titled “Webhook Integration” and copy the webhook URL.
+
+https://docs.github.com/en/webhooks/using-webhooks/creating-webhooks
+
+
+SELECT
+      id,
+      SUM(win) AS Wins,
+      SUM(loss) AS Losses
+    FROM (
+      SELECT
+        t.participants.defender AS id,
+        r.result.passed_tests_count as win,
+        r.result.failed_tests_count as loss
+      FROM results t
+      CROSS JOIN UNNEST(t.results) AS r(result))
+    GROUP BY id
+    ORDER BY wins DESC, losses ASC, id;

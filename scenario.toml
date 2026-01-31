@@ -1,6 +1,7 @@
 [green_agent]
 agentbeats_id = "019c10d4-36f2-7f70-b8c3-bb582aa6f968"
 name = "green-society-judge"
+port = 9021
 env = { API_KEY = "${GEMINI_API_KEY}" }
 
 [[participants]]
