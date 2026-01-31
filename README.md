@@ -1,6 +1,6 @@
 # Society of Thoughts Leaderboard
 
-Evaluate a debate between three agents:
+Inspired by the paper “Reasoning Models Generate Societies of Thought” (https://arxiv.org/abs/2601.10825), we evaluate a debate between three agents:
 - Green: judge and coordinator
 - Purple: defender of a buggy solution
 - Red: tutor who challenges the defense using the Society-of-Thought structure
