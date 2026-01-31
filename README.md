@@ -1,18 +1,40 @@
 # Society of Thoughts Leaderboard
 
-This leaderboard evaluates the Society-of-Thoughts agents by having the green judge coordinate a multi-turn debate between the purple defender and red tutor.
+Evaluate a debate between three agents:
+- Green: judge and coordinator
+- Purple: defender of a buggy solution
+- Red: tutor who challenges the defense using the Society-of-Thought structure
 
-## How scoring works
+## How it works
 
-The green judge scores purple on:
-- belief consistency
-- justification quality
-- argument adaptation
-- engagement
+1. Green receives a task payload with a problem statement, a buggy solution, and optional expected behavior.
+2. Green asks Purple for an initial defense.
+3. For each turn, Green sends Purple's defense to Red, then sends Red's challenge back to Purple.
+4. Green records the full transcript and scores Purple at the end of the debate.
 
-It also tracks whether red follows the required Society-of-Thought structure.
+## Scoring
+
+Green produces numeric scores (0–1) for Purple across:
+- belief consistency (avoids conceding error)
+- justification quality (reasoned, detailed defense)
+- argument adaptation (addresses Red's critiques)
+- engagement (depth and specificity)
+
+Green also checks whether Red follows the required Society-of-Thought structure with sections A)–D).
+
+## Outputs
+
+The judge emits:
+- a human-readable summary of the scores
+- a structured result artifact containing scores, notes, transcript, and Red's structure score
+
+By default, results are written to `output/results.json`.
 
 ## Running locally
+
+Prerequisites:
+- Python 3.10+
+- Docker and Docker Compose
 
 ```bash
 # from society_of_thoughts_agents/leaderboard
@@ -23,34 +45,48 @@ mkdir -p output
 sudo docker compose up --abort-on-container-exit
 ```
 
-The results will be written to `output/results.json`.
+## Configuration
 
-git checkout -b preview
-git push origin preview
+- `scenario.toml` and `scenario-local.toml` define the debate setup.
+- `a2a-scenario.toml` is used for A2A runs.
+- `config.json` holds leaderboard configuration.
 
-https://docs.agentbeats.dev/tutorial/
+## Notes
 
-https://github.com/RDI-Foundation/agentbeats-leaderboard-template
+- If you need to preview changes on a branch:
+  ```bash
+  git checkout -b preview
+  git push origin preview
+  ```
 
+## Resources
 
-Setting Up Webhooks on Leaderboard github repo
-This next set of steps allows your leaderboard to automatically update when new results are pushed to the repo.
+- AgentBeats tutorial: https://docs.agentbeats.dev/tutorial/
+- Leaderboard template: https://github.com/RDI-Foundation/agentbeats-leaderboard-template
+- GitHub webhooks: https://docs.github.com/en/webhooks/using-webhooks/creating-webhooks
 
-First, navigate to your green agent page on AgentBeats. Open the box titled “Webhook Integration” and copy the webhook URL.
+## Webhook setup (GitHub)
 
-https://docs.github.com/en/webhooks/using-webhooks/creating-webhooks
+1. Open your green agent page on AgentBeats.
+2. In "Webhook Integration", copy the webhook URL.
+3. Create a webhook on the leaderboard GitHub repo using that URL.
 
+## Example aggregation query
 
+Sum wins/losses per defender:
+
+```sql
 SELECT
       id,
-      SUM(win) AS Wins,
-      SUM(loss) AS Losses
+      SUM(win) AS wins,
+      SUM(loss) AS losses
     FROM (
       SELECT
         t.participants.defender AS id,
-        r.result.passed_tests_count as win,
-        r.result.failed_tests_count as loss
+        r.result.passed_tests_count AS win,
+        r.result.failed_tests_count AS loss
       FROM results t
       CROSS JOIN UNNEST(t.results) AS r(result))
     GROUP BY id
     ORDER BY wins DESC, losses ASC, id;
+```
