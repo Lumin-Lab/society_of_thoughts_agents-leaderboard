@@ -26,4 +26,4 @@ expected_behavior = [
   { input = [[5, 5, 1]], output = [1, 5, 5] },
   { input = [[-1, 0, -1]], output = [-1, -1, 0] }
 ]
-num_turns = 5
+num_turns = 7
