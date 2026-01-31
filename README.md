@@ -77,16 +77,26 @@ Sum wins/losses per defender:
 
 ```sql
 SELECT
-      id,
-      SUM(win) AS wins,
-      SUM(loss) AS losses
-    FROM (
-      SELECT
-        t.participants.defender AS id,
-        r.result.passed_tests_count AS win,
-        r.result.failed_tests_count AS loss
-      FROM results t
-      CROSS JOIN UNNEST(t.results) AS r(result))
-    GROUP BY id
-    ORDER BY wins DESC, losses ASC, id;
+  id, 
+ tutor_id, 
+  AVG(overall) AS Overall,
+  AVG(engagement) AS Engagement, 
+  AVG(consistency) AS Consistency, 
+  AVG(justification) AS Justification, 
+  AVG(argument) AS Argument
+FROM (
+  SELECT
+    t.participants.purple AS id,
+    t.participants.red AS tutor_id,
+    r.result.scores.overall AS overall,
+    r.result.scores.consistency_of_belief AS consistency,
+    r.result.scores.justification_quality AS justification,
+    r.result.scores.argument_adaptation AS argument,
+    r.result.scores.engagement AS engagement
+  FROM results t
+  CROSS JOIN UNNEST(t.results) AS r(result)
+)
+GROUP BY id, 
+ tutor_id 
+ORDER BY overall DESC, engagement DESC, id;
 ```
