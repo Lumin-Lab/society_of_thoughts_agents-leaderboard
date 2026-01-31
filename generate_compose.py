@@ -213,10 +213,11 @@ def generate_a2a_scenario(scenario: dict[str, Any]) -> str:
 
     participant_lines = []
     for p in participants:
+        port = p.get("port", DEFAULT_PORT)
         lines = [
             f"[[participants]]",
             f"role = \"{p['name']}\"",
-            f"endpoint = \"http://{p['name']}:{DEFAULT_PORT}\"",
+            f"endpoint = \"http://{p['name']}:{port}\"",
         ]
         if "agentbeats_id" in p:
             lines.append(f"agentbeats_id = \"{p['agentbeats_id']}\"")
@@ -226,7 +227,7 @@ def generate_a2a_scenario(scenario: dict[str, Any]) -> str:
     config_lines = [tomli_w.dumps({"config": config_section})]
 
     return A2A_SCENARIO_TEMPLATE.format(
-        green_port=DEFAULT_PORT,
+        green_port=DEFAULT_GREEN_PORT,
         participants="\n".join(participant_lines),
         config="\n".join(config_lines),
         suffix = SUFFIX

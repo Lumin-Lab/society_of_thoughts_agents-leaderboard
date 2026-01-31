@@ -2,17 +2,19 @@
 endpoint = "http://green-agent-society:9021"
 
 [[participants]]
-role = "purple"
-endpoint = "http://purple-society:9022"
+role = "purple-society-student"
+endpoint = "http://purple-society-student:9022"
+agentbeats_id = "019c10da-59bf-7390-b4c0-652915699fc8"
 
 [[participants]]
-role = "red"
-endpoint = "http://red-society:9023"
+role = "red-society-tutor"
+endpoint = "http://red-society-tutor:9023"
+agentbeats_id = "019c10d6-08b1-7a83-9fb8-b8e35c78ad9e"
 
 [config]
 problem_statement = "Sort a list of integers in nondecreasing order."
 buggy_solution = "def sort_nums(nums):\n    return nums.sort()\n"
-num_turns = 5
+num_turns = 7
 
 [[config.expected_behavior]]
 input = [
