@@ -24,3 +24,4 @@ sudo docker compose up --abort-on-container-exit
 ```
 
 The results will be written to `output/results.json`.
+git push origin preview
