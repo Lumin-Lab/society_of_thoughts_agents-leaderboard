@@ -1,22 +1,21 @@
 [green_agent]
-agentbeats_id = 019c10d4-36f2-7f70-b8c3-bb582aa6f968
+agentbeats_id = "019c10d4-36f2-7f70-b8c3-bb582aa6f968"
 name = "green-society-judge"
-image = "ghcr.io/lumin-lab/green-society-of-thoughts-coding-judge-agent:v0.1"
+port = 9021
 env = { API_KEY = "${GEMINI_API_KEY}" }
 
 [[participants]]
-agentbeats_id = 019c10da-59bf-7390-b4c0-652915699fc8
+agentbeats_id = "019c10da-59bf-7390-b4c0-652915699fc8"
 name = "purple-society-student"
+role = "purple"
 port = 9022
-image = "ghcr.io/lumin-lab/purple-society-of-thoughts-coding-student-agent:v0.1"
 env = { API_KEY = "${GEMINI_API_KEY}" }
 
 [[participants]]
-agentbeats_id = 019c10d6-08b1-7a83-9fb8-b8e35c78ad9e
+agentbeats_id = "019c10d6-08b1-7a83-9fb8-b8e35c78ad9e"
 name = "red-society-tutor"
-= 019c10d6-08b1-7a83-9fb8-b8e35c78ad9e
+role = "red"
 port = 9023
-image = "ghcr.io/lumin-lab/red-society-of-thoughts-coding-tutor-agent:v0.1"
 env = { API_KEY = "${GEMINI_API_KEY}" }
 
 [config]
@@ -30,4 +29,4 @@ expected_behavior = [
   { input = [[5, 5, 1]], output = [1, 5, 5] },
   { input = [[-1, 0, -1]], output = [-1, -1, 0] }
 ]
-num_turns = 5
+num_turns = 8

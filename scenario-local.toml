@@ -1,13 +1,19 @@
 [green_agent]
-image = "society-of-thoughts-green:local"
+name = "green-society-judge"
+image = "ghcr.io/lumin-lab/green-society-of-thoughts-coding-judge-agent:v0.1"
+env = { API_KEY = "${GEMINI_API_KEY}" }
 
 [[participants]]
-name = "purple"
-image = "society-of-thoughts-purple:local"
+name = "purple-society-student"
+port = 9022
+image = "ghcr.io/lumin-lab/purple-society-of-thoughts-coding-student-agent:v0.1"
+env = { API_KEY = "${GEMINI_API_KEY}" }
 
 [[participants]]
-name = "red"
-image = "society-of-thoughts-red:local"
+name = "red-society-tutor"
+port = 9023
+image = "ghcr.io/lumin-lab/red-society-of-thoughts-coding-tutor-agent:v0.1"
+env = { API_KEY = "${GEMINI_API_KEY}" }
 
 [config]
 problem_statement = "Sort a list of integers in nondecreasing order."
@@ -17,6 +23,7 @@ def sort_nums(nums):
 """
 expected_behavior = [
   { input = [[3, 1, 2]], output = [1, 2, 3] },
-  { input = [[5, 5, 1]], output = [1, 5, 5] }
+  { input = [[5, 5, 1]], output = [1, 5, 5] },
+  { input = [[-1, 0, -1]], output = [-1, -1, 0] }
 ]
-num_turns = 3
+num_turns = 10

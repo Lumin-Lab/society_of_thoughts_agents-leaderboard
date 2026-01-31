@@ -16,18 +16,18 @@ services:
       retries: 10
       start_period: 30s
     depends_on:
-      purple:
+      purple-society-student:
         condition: service_healthy
-      red:
+      red-society-tutor:
         condition: service_healthy
     networks:
       - agent-network
 
-  purple:
+  purple-society-student:
     image: ghcr.io/lumin-lab/purple-society-of-thoughts-coding-student-agent:v0.1
     platform: linux/amd64
-    container_name: purple-society
-    command: ["--host", "0.0.0.0", "--port", "9022", "--card-url", "http://purple-society:9022"]
+    container_name: purple-society-student-society
+    command: ["--host", "0.0.0.0", "--port", "9022", "--card-url", "http://purple-society-student-society:9022"]
     environment:
       - PYTHONUNBUFFERED=1
       - API_KEY=${GEMINI_API_KEY}
@@ -40,11 +40,11 @@ services:
     networks:
       - agent-network
 
-  red:
+  red-society-tutor:
     image: ghcr.io/lumin-lab/red-society-of-thoughts-coding-tutor-agent:v0.1
     platform: linux/amd64
-    container_name: red-society
-    command: ["--host", "0.0.0.0", "--port", "9023", "--card-url", "http://red-society:9023"]
+    container_name: red-society-tutor-society
+    command: ["--host", "0.0.0.0", "--port", "9023", "--card-url", "http://red-society-tutor-society:9023"]
     environment:
       - PYTHONUNBUFFERED=1
       - API_KEY=${GEMINI_API_KEY}
@@ -57,7 +57,7 @@ services:
     networks:
       - agent-network
 
-  agentbeats-client-society:
+  agentbeats-client:
     image: ghcr.io/agentbeats/agentbeats-client:v1.0.0
     platform: linux/amd64
     container_name: agentbeats-client-society
@@ -68,9 +68,9 @@ services:
     depends_on:
       green-agent:
         condition: service_healthy
-      purple:
+      purple-society-student:
         condition: service_healthy
-      red:
+      red-society-tutor:
         condition: service_healthy
     networks:
       - agent-network
