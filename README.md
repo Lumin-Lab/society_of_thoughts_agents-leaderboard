@@ -30,6 +30,8 @@ git push origin preview
 
 https://docs.agentbeats.dev/tutorial/
 
+https://github.com/RDI-Foundation/agentbeats-leaderboard-template
+
 
 Setting Up Webhooks on Leaderboard github repo
 This next set of steps allows your leaderboard to automatically update when new results are pushed to the repo.
