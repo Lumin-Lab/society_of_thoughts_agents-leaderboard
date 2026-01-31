@@ -1,0 +1,18 @@
+{
+  "image_digests": {
+    "green-agent": "ghcr.io/lumin-lab/red-society-of-thoughts-coding-tutor-agent@sha256:39824e4e2dcf083608db372faece6c2b6f9c329b86a7274acace83b7c2bf47e7",
+    "purple-society-student": "ghcr.io/lumin-lab/purple-society-of-thoughts-coding-student-agent@sha256:3ece1ba30cf98f8c91dfc48ae80d36983c8cf5407fd7d373e4a8d65d9d4bb6ca",
+    "red-society-tutor": "ghcr.io/lumin-lab/red-society-of-thoughts-coding-tutor-agent@sha256:39824e4e2dcf083608db372faece6c2b6f9c329b86a7274acace83b7c2bf47e7",
+    "agentbeats-client": "ghcr.io/agentbeats/agentbeats-client@sha256:13dfe3ef4e583a80e7ce2fe3becd0ce3b879841368a7f4fa40b6ebbabeeb014e"
+  },
+  "timestamp": "2026-01-31T15:57:39Z",
+  "github_actions": {
+    "run_url": "https://github.com/Lumin-Lab/society_of_thoughts_agents-leaderboard/actions/runs/21547010480",
+    "run_logs_url": "https://api.github.com/repos/Lumin-Lab/society_of_thoughts_agents-leaderboard/actions/runs/21547010480/logs",
+    "ref": "refs/heads/preview",
+    "sha": "177aa84828fd3888c223b74ec6a9c1f2268f65fe",
+    "repository_url": "https://github.com/Lumin-Lab/society_of_thoughts_agents-leaderboard",
+    "workflow_ref": "Lumin-Lab/society_of_thoughts_agents-leaderboard/.github/workflows/run-scenario.yml@refs/heads/preview",
+    "workflow_sha": "177aa84828fd3888c223b74ec6a9c1f2268f65fe"
+  }
+}
