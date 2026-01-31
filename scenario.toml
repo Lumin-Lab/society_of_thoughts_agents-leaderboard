@@ -1,21 +1,18 @@
 [green_agent]
 agentbeats_id = "019c10d4-36f2-7f70-b8c3-bb582aa6f968"
 name = "green-society-judge"
-image = "ghcr.io/lumin-lab/green-society-of-thoughts-coding-judge-agent:v0.1"
 env = { API_KEY = "${GEMINI_API_KEY}" }
 
 [[participants]]
 agentbeats_id = "019c10da-59bf-7390-b4c0-652915699fc8"
 name = "purple-society-student"
 port = 9022
-image = "ghcr.io/lumin-lab/purple-society-of-thoughts-coding-student-agent:v0.1"
 env = { API_KEY = "${GEMINI_API_KEY}" }
 
 [[participants]]
 agentbeats_id = "019c10d6-08b1-7a83-9fb8-b8e35c78ad9e"
 name = "red-society-tutor"
 port = 9023
-image = "ghcr.io/lumin-lab/red-society-of-thoughts-coding-tutor-agent:v0.1"
 env = { API_KEY = "${GEMINI_API_KEY}" }
 
 [config]
