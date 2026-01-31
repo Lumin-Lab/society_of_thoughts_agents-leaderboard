@@ -2,7 +2,7 @@
 
 services:
   green-agent:
-    image: ghcr.io/lumin-lab/red-society-of-thoughts-coding-tutor-agent:v0.1
+    image: ghcr.io/lumin-lab/green-society-of-thoughts-coding-judge-agent:v0.1
     platform: linux/amd64
     container_name: green-agent-society
     command: ["--host", "0.0.0.0", "--port", "9021", "--card-url", "http://green-agent-society:9021"]
